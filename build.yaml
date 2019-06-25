@@ -1,0 +1,17 @@
+builders:
+  mustache_builder:
+    import: 'package:mustache_builder/builder.dart'
+    builder_factories: ['htmlBuilder']
+    build_to: cache
+    build_extensions:
+      '.mustache.html': ['.html']
+    auto_apply: dependents
+    required_inputs: ['.js', '.css']
+    applies_builders: ["|template_cleanup"]
+post_process_builders:
+  template_cleanup:
+    import: "package:mustache_builder/builder.dart"
+    builder_factory: templateCleanupBuilder
+    defaults:
+      release_options:
+        enabled: true
